@@ -1,1 +1,15 @@
 
+1.使用 dva-cli 创建项目
+https://github.com/dvajs/dva-cli
+
+# Install
+$ npm install dva-cli -g
+
+# Create app
+$ dva new myapp
+
+# Start app
+$ cd myapp
+$ npm start
+
+2.
