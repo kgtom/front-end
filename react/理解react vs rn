@@ -1,0 +1,8 @@
+ReactJs:js实现的Virtual DOM 来驱动界面view渲染, 
+virtual dom 类似于在 js 和dom 之间的缓存，取类比象， cup 操作硬盘很慢，中间加了一个内存，然后最终同步到硬盘。
+
+rn: React Native是驱动android/ios原生组件渲染。之前有个ns(Native Scripts 使用js操作app原生组件)
+
+reference:https://www.zhihu.com/question/29504639
+
+
