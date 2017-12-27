@@ -21,5 +21,12 @@ brew install node
 6.测试Node和npm安装是否成功，安装Grunt
 npm install -g grunt-cli
 如果安装成功，那么恭喜你node，npm，grunt均安装成功。若出现问题，请回顾前面内容。
+7.查看npm 安装全局的包或者依赖包
+npm list -g 
+8.安装依赖包
+npm install xxx --save
+eg:npm install react-slick --save
 
-reference:https://www.jianshu.com/p/20ea93641bda
+reference:
+http://www.runoob.com/nodejs/nodejs-npm.html
+https://www.jianshu.com/p/20ea93641bda
