@@ -14,7 +14,11 @@ sudo rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/{npm*,node*,man
 brew link node
 brew uninstall node
 brew install node
-5.测试Node和npm安装是否成功，安装Grunt
+5. 执行以下命令查看是否安装成功
+    node -v:查看node版本
+    npm -v：查看npm版本
+
+6.测试Node和npm安装是否成功，安装Grunt
 npm install -g grunt-cli
 如果安装成功，那么恭喜你node，npm，grunt均安装成功。若出现问题，请回顾前面内容。
 
