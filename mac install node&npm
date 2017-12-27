@@ -1,0 +1,21 @@
+1.若在上文中出现，如下错误信息：
+Warning: You have unlinked kegs in your Cellar
+Leaving kegs unlinked can lead to build-trouble and cause brews that depend on
+those kegs to fail to run properly once built. Run brew link on these:
+node
+则需要如下操作：
+
+2.清理brew的link
+$ brew cleanup
+3.删除node文件，完全卸载node和npm
+sudo rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/{npm*,node*,man1/node*}
+
+4.通过brew安装node和npm
+brew link node
+brew uninstall node
+brew install node
+5.测试Node和npm安装是否成功，安装Grunt
+npm install -g grunt-cli
+如果安装成功，那么恭喜你node，npm，grunt均安装成功。若出现问题，请回顾前面内容。
+
+reference:https://www.jianshu.com/p/20ea93641bda
