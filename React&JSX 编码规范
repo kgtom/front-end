@@ -1,0 +1,44 @@
+创建模块
+Class vs React.createClass vs stateless
+
+如果你的模块有内部状态或者是refs, 推荐使用 class extends React.Component 而不是 React.createClass. eslint: react/prefer-es6-class react/prefer-stateless-function
+
+// bad
+const Listing = React.createClass({
+  // ...
+  render() {
+    return <div>{this.state.hello}</div>;
+  }
+});
+
+// good
+class Listing extends React.Component {
+  // ...
+  render() {
+    return <div>{this.state.hello}</div>;
+  }
+}
+如果你的模块没有状态或是没有引用refs， 推荐使用普通函数（非箭头函数）而不是类:
+
+// bad
+class Listing extends React.Component {
+  render() {
+    return <div>{this.props.hello}</div>;
+  }
+}
+
+// bad (relying on function name inference is discouraged)
+const Listing = ({ hello }) => (
+  <div>{hello}</div>
+);
+
+// good
+function Listing({ hello }) {
+  return <div>{hello}</div>;
+}
+
+
+
+reference:
+https://github.com/airbnb/javascript/tree/master/react
+https://github.com/JasonBoy/javascript/tree/master/react
