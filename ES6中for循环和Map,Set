@@ -1,0 +1,51 @@
+
+1.for-in方法实际上是为存储key的键值对型对象准备的，而不是为数组准备的
+for-of不仅仅可以用于数组，还可以用在dom对象上，同样作用于Map和Set对象。
+var a = ["a","b","c","d","e"];
+for (var idx in a) {
+     console.log( idx ); 
+     }// 0 1 2 3 4 
+
+for (var val of a) {
+     console.log( val ); 
+     }// "a" "b" "c" "d" "e"
+     
+2.Map
+JavaScript的默认对象表示方式是{}，但是JavaScript的对象有个小问题，就是键必须是字符串。但实际上Number或者其他数据类型作为键也是非常合理的。
+
+为了解决这个问题，最新的ES6规范引入了新的数据类型Map。
+
+Map是具有极快查找速度的键值对结构。
+
+我们看看Map的使用示例：
+
+var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
+m.get('Michael'); // 95
+var m = new Map(); // 空Map
+m.set('Adam', 67); // 添加新的key-value
+m.set('Bob', 59);
+m.has('Adam'); // 是否存在key 'Adam': true
+m.get('Adam'); // 67
+m.delete('Adam'); // 删除key 'Adam'
+m.get('Adam'); // undefined
+
+
+Set和Map类似，也是存在key的列表，只不过Set中的元素不能够重复。
+
+var s1 = new Set(); // 空Set
+var s2 = new Set([1, 2, 3]); // 含1, 2, 3
+var s = new Set([1, 2, 3, 3, '3']);
+s; // Set {1, 2, 3, "3"}
+
+可以看到，再次添加的重复数据会被过滤掉。
+
+那么这两种对象的运用场景有哪些呢？
+
+Map可以用来存储键值对，比如姓名和年龄，而Set可以用来存储不能重复的目标，比如学号列表。
+例子：给data 数组新增一个isleaf的属性。
+data.map((v, k) => {
+            data[k]["isLeaf"] = v.count === 0;
+          });
+          
+reference:
+http://blog.csdn.net/mevicky/article/details/49861753
