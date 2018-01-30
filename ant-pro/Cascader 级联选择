@@ -1,0 +1,7 @@
+注意几点：
+1.isLeaf=false 用以追加下一个节点
+2.Cascader 中changeOnSelect 使用
+3.理解react的声明周期,尤其是子组件获取父组件的值是，在构造函数、render两处的区别。
+
+reference:
+https://www.cnblogs.com/wx1993/p/6511389.html
