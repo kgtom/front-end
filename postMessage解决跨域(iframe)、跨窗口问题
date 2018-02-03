@@ -1,0 +1,38 @@
+postMessage()方法允许来自不同源的脚本采用异步方式进行通信，可以实现跨文本档、多窗口、跨域(iframe)消息传递。
+
+发送方：
+postMessage(data,origin)方法接受两个参数
+
+ 1.data:要传递的数据，复杂的数据结构使用JSON.stringify()对参数对象序列化
+ 
+
+2.origin：字符串参数，指明目标窗口的源，协议+主机+端口号[+URL]，URL会被忽略，所以可以不写，
+这个参数是为了安全考虑，
+postMessage()方法只会将message传递给指定窗口，
+当然如果愿意也可以建参数设置为"*"，这样可以传递给任意窗口，如果要指定和当前窗口同源的话设置为"/"。
+
+接收方：
+监听window的message事件获取信息，使用MessageEvent对象判断了一下消息源
+
+eg：
+var hanndleMessage = function (event) {
+        var origin = event.origin;
+        console.log("origin", event.origin);
+        if( origin == "https://login.dingtalk.com" ) { //判断是否来自ddLogin扫码事件。
+            var loginTmpCode = event.data; //拿到loginTmpCode后就可以在这里构造跳转链接进行跳转了
+            console.log("loginTmpCode", loginTmpCode);
+        }
+ 
+};
+ 
+if (typeof window.addEventListener != 'undefined') {
+    window.addEventListener('message', hanndleMessage, false);
+} else if (typeof window.attachEvent != 'undefined') {
+    window.attachEvent('onmessage', hanndleMessage);
+}
+
+reference:
+https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.emdTFx&treeId=385&articleId=104882&docType=1
+https://www.cnblogs.com/dolphinX/p/3464056.html
+
+
