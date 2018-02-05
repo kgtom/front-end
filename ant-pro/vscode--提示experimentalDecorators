@@ -1,0 +1,4 @@
+提示：对修饰器的实验支持是一项将在将来版本中更改的功能。设置 "experimentalDecorators" 选项以删除此警告。
+
+解决方案：vscode--->首选项--->设置----》搜索 experimentalDecorators，设置为true即可。
+ "javascript.implicitProjectConfig.experimentalDecorators": true
