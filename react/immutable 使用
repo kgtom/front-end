@@ -1,0 +1,26 @@
+1numberObject是一个对象
+2.number是一个数字变量
+3数字变量（number类型）和对象（Object类型）的内存存储机制不同
+ 
+javascript变量分为基本类型变量和引用类型变量
+对于number,string,boolean,undefined,null这些基本类型变量，值存在栈中：
+
+对于object,Array,function这些引用类型变量，引用存在栈中，而不同的引用却可以指向堆内存中的同一个对象：
+
+然后我们回过头再去看刚才的问题，在上面，nextProps.numberObject和this.props.numberObject的实际上指向的是同一个堆内存中的对象，所以点击标题时在多次判断条件中nextProps.numberObject.number==this.props.numberObject.number 等同于0 == 0 --> 1 == 1--> 2 == 2，所以总返回true，导致每次点击 调用shouldComponentUpdate()函数时都阻止了渲染，所以我们才看不到标题变化和控制台输出。
+怎么才能保证每次取到不同的numberObject？
+ 
+我们有三种方式：
+ 
+1.ES6的扩展语法Object.assign()//react官方推荐的es6写法
+2深拷贝／浅拷贝或利用JSON.parse(JSON.stringify(data))//相当于深拷贝，但使用受一定限制，具体的童鞋们可自行百度
+3 immutable.js//react官方推荐使用的第三方库，目前github上20K star,足见其火热
+4 继承react的PureComponent组件
+
+1优点：深拷贝/浅拷贝本身是很耗内存，而immutable本身有一套机制使内存消耗降到最低
+
+
+reference:
+https://github.com/facebook/immutable-js/blob/master/README.md
+https://www.cnblogs.com/penghuwan/p/6707254.html
+
