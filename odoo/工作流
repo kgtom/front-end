@@ -1,0 +1,5 @@
+1.工作流活动模型，固定为workflow.activity，osv 工作流绑定的对象模型
+2.重启server ---更新应用列表---升级 或者 有时间因为数据字段调整，需要先模块，清理数据，再安装模块
+3.审批按钮的权限给到了base.group_user组
+reference:
+https://zhuanlan.zhihu.com/p/29133719
