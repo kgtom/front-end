@@ -1,0 +1,23 @@
+reference:
+http://www.cnblogs.com/toby2chen/p/5177114.html
+https://www.cnblogs.com/crazyguo/p/6999408.html
+
+
+*权限管理的四个层次
+    # 菜单级别：不属于指定菜单所包含组的用户看不到该菜单，不客全，只是隐藏
+                 菜单，若知道菜单ID，仍然可以通过指定URL访问
+    # 对象级别：对某个对角是否有'创建，读取，修改，删除'的权限，可以简单理解为
+                表对象
+    # 记录级别：对对象表中的数据的访问权限，比如访问“客户”对象，业务员只能对自己创建
+                的客户有访问权限，而经理可以访问其管辖的业务员所有的“客户”对象
+    # 字段级别：一个对象或表上的某些字段的访问权限，比如产品的成本字段只有经理有读权限
+        'name':fields.char('Name',size=128,required=True,select=True,write=['base.group_admin']
+               read=['base.group_admin'])
+        定义name字段只能超级用户组可读写
+        
+     
+ 模块下 security 目录有两个文件：xxx_security.xml、ir.model.access.csv。
+ 
+其中：
+xxx_security.xml文件定义组和组对菜单的访问权限，
+ir.model.access.csv定义组对对象的权限。
