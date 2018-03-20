@@ -1,8 +1,0 @@
-odoo权限分级：
-
-第一级是access rule，即表级权限，控制用户组对表的访问权限，一般是用security/ir.model.access.csv文件来管理
-第二级是record rule，即行级权限，控制用户组对表中数据行的访问权限，可以写在views/views.xml文件中
-其实还有第三级权限，是字段级权限，之后再学习。
-
-reference:
-https://zhuanlan.zhihu.com/p/29130388
