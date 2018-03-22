@@ -1,0 +1,86 @@
+
+在后台管理项目中，用户要求上传音频，并且自动获取音频时长。
+
+第一步， import { Upload, Button, Icon } from 'antd';
+
+第二步，在表单中使用 Upload 组件，上传音频：
+
+<FormItem {...formItemLayout} label="英文音频信息">
+  <Row gutter={8}>
+    <Col span={12}>
+      <Input type="text" placeholder="景点的英文音频信息" value={site.enAudio} disabled />
+    </Col>
+    <Col span={12}>
+      <Upload
+　　action="/hserve/v2/file/upload/"  　　// 必选参数，上传的地址
+　　listType="picture"  　　　　　　　　   // 上传列表的内建样式（text、picture、picture-card）
+　　showUploadList={false}  　　             // 是否显示 uploadList
+　　accept="audio/*" 　　　　　　　　    // 接受上传的文件类型
+　　fileList={enAudioFileList}　　　　　　 // 已经上传的文件列表
+　　onChange={this.handleAudioChange}    // 上传文件改变时的状态
+     >
+　　   <Button>
+　　　　<Icon type="upload" /> 浏览
+　　  </Button>
+      </Upload>
+    </Col>
+  </Row>
+</FormItem>
+ 
+handleAudioChange = (type, { file, fileList }) => {
+　　if (file.status === 'done') {
+　　　　fileList[fileList.length - 1].url = file.response.path
+　　　　let lastFile = fileList[fileList.length - 1]
+　　　　this.setState({
+　　　　　　enAudioFileList: fileList,
+　　　　　　site: { ...this.state.site, enAudio: lastFile.url }
+　　　　})
+　　return
+　　}
+　　this.setState({ enAudioFileList: fileList })
+}
+ 
+第三步，使用 react-audio-player：
+　　import ReactAudioPlayer from 'react-audio-player'
+　　　
+　　{
+　　　　site.cnAudio  　　　　//判断是否已有音频 url
+　　　　? (
+　　　　　　<ReactAudioPlayer
+　　　　　　　　ref={(element) => { duration.cnDuration = element; }}
+　　　　　　　　src={site.cnAudio}
+　　　　　　　　onCanPlay={this.onCanPlay}
+　　　　　　/>
+　　　　)
+　　　　: null
+　　}
+ 
+　　
+　　onCanPlay = () => {
+　　　　let duration = this.state.duration
+　　　　// duration.enDuration.audioEl.duration 返回的是一个带小数的数字，因此用 Math.round 做了下处
+　　　　let enDuration = duration.enDuration ? Math.round(duration.enDuration.audioEl.duration) : null
+
+    　　  enDuration = enDuration ? this.setDuration(enDuration) : null
+　　　　this.setState({
+　　　　　　site: {...this.state.site, enDuration: enDuration}
+　　　　})
+　　}
+　　
+　　// 将 duration 设为 00:00 的格式
+　　setDuration = (sec) => {
+　　　　let min = 0
+ 
+　　　　sec = sec <=10 ? '0' + sec : sec
+　　　　if (sec >= 60) {
+　　　　　　min = (sec / 60).toFixed()
+　　　　　　sec = sec % 60 >= 10 ? sec % 60 : '0' + sec % 60
+　　　　}
+　　　　min = min >= 10 ? min : '0' + min
+　　　　let time = min + ':' + sec
+　　　　return time
+　　}
+ 
+音频时长为 this.state.site.enDuration。
+reference:
+https://www.cnblogs.com/lee-xiumei/p/7922300.html
