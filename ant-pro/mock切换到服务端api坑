@@ -1,0 +1,18 @@
+使用 Ant Design Pro时，按照官网切换方式，发现有坑，在它GitHub上面，发现了答案.
+
+原来的文档是有问题的。如果你这么写：
+
+'GET /api/*': 'http://your.server.com/api/',
+那么 http://localhost:8000/api/xxx 会被转发到 http://your.server.com/api/api/xxx ，实际上是把前面的路径拼到后面的路径上。
+
+需要改成下面这样：
+
+'GET /api/(.*)': 'http://your.server.com/api/',
+或者
+
+'GET /api/*': 'http://your.server.com/',
+
+这样 http://localhost:8000/api/xxx 会被转发到 http://your.server.com/api/xxx
+
+reference:
+https://github.com/ant-design/ant-design-pro/issues/325#issuecomment-353300890
