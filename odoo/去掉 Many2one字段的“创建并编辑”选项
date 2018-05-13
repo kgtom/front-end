@@ -1,0 +1,2 @@
+
+去掉 Many2one字段的“创建并编辑”选项，在view.xml里对应的field定义里增加options="{'no_create_edit':1}。
