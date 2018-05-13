@@ -1,0 +1,16 @@
+
+1.ondelete删除
+type_id = fields.Many2one('a', string='a', ondelete='set null')
+
+则当对模型a进行delete操作时，有如下三种操作
+
+set null: 当a中删除记录时，当前模型中 type_id =null
+
+cascade: 当a中删除记录时，当前模型中 type_id 也全部删除
+
+restrict: 当a中删除记录时，当前模型如何存在对应记录，则无法删除 a
+
+默认是： set null
+
+2.去掉 创建并编辑 选项
+去掉 Many2one字段的'创建并编辑'选项，在view.xml里对应的field定义里增加options="{'no_create_edit':1}。
